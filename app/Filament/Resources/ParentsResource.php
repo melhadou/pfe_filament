@@ -12,6 +12,10 @@ use Filament\Resources\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables;
 
+// filters 
+// use Filament\Tables\Filters\Filter;
+// use Illuminate\Database\Eloquent\Builder;
+
 class ParentsResource extends Resource
 {
   protected static ?string $model = Parents::class;
@@ -42,9 +46,7 @@ class ParentsResource extends Resource
         Tables\Columns\TextColumn::make('email')->sortable(),
         Tables\Columns\TextColumn::make('phone')->sortable(),
       ])
-      ->filters([
-        //
-      ]);
+      ->filters([]);
   }
 
   public static function getRelations(): array
