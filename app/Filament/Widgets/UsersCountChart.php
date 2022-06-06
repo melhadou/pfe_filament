@@ -13,15 +13,15 @@ class UsersCountChart extends LineChartWidget
   {
     return 'Parents Created';
   }
-
+  public ?string $filter = 'today';
   protected function getData(): array
   {
     $data = Trend::model(Parents::class)
       ->between(
-        start: now()->startOfMonth(),
-        end: now()->endOfMonth(),
+        start: now()->startOfDay(),
+        end: now()->endOfDay(),
       )
-      ->perDay()
+      ->perHour()
       ->count();
 
     return [
