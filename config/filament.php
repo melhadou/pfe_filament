@@ -16,7 +16,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 return [
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Filament Path
     |--------------------------------------------------------------------------
@@ -26,10 +26,10 @@ return [
     |
     */
 
-    'path' => env('FILAMENT_PATH', 'admin'),
+  'path' => env('FILAMENT_PATH', '/'),
 
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Filament Core Path
     |--------------------------------------------------------------------------
@@ -39,10 +39,10 @@ return [
     |
     */
 
-    'core_path' => env('FILAMENT_CORE_PATH', 'filament'),
+  'core_path' => env('FILAMENT_CORE_PATH', 'filament'),
 
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Filament Domain
     |--------------------------------------------------------------------------
@@ -52,9 +52,9 @@ return [
     |
     */
 
-    'domain' => env('FILAMENT_DOMAIN'),
+  'domain' => env('FILAMENT_DOMAIN'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Homepage URL
     |--------------------------------------------------------------------------
@@ -64,9 +64,9 @@ return [
     |
     */
 
-    'home_url' => '/',
+  'home_url' => '/',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Brand Name
     |--------------------------------------------------------------------------
@@ -75,9 +75,9 @@ return [
     |
     */
 
-    'brand' => env('APP_NAME'),
+  'brand' => env('APP_NAME'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Auth
     |--------------------------------------------------------------------------
@@ -87,14 +87,14 @@ return [
     |
     */
 
-    'auth' => [
-        'guard' => env('FILAMENT_AUTH_GUARD', 'web'),
-        'pages' => [
-            'login' => \Filament\Http\Livewire\Auth\Login::class,
-        ],
+  'auth' => [
+    'guard' => env('FILAMENT_AUTH_GUARD', 'web'),
+    'pages' => [
+      'login' => \Filament\Http\Livewire\Auth\Login::class,
     ],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Pages
     |--------------------------------------------------------------------------
@@ -104,15 +104,15 @@ return [
     |
     */
 
-    'pages' => [
-        'namespace' => 'App\\Filament\\Pages',
-        'path' => app_path('Filament/Pages'),
-        'register' => [
-            Pages\Dashboard::class,
-        ],
+  'pages' => [
+    'namespace' => 'App\\Filament\\Pages',
+    'path' => app_path('Filament/Pages'),
+    'register' => [
+      Pages\Dashboard::class,
     ],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Resources
     |--------------------------------------------------------------------------
@@ -122,13 +122,13 @@ return [
     |
     */
 
-    'resources' => [
-        'namespace' => 'App\\Filament\\Resources',
-        'path' => app_path('Filament/Resources'),
-        'register' => [],
-    ],
+  'resources' => [
+    'namespace' => 'App\\Filament\\Resources',
+    'path' => app_path('Filament/Resources'),
+    'register' => [],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Widgets
     |--------------------------------------------------------------------------
@@ -138,16 +138,16 @@ return [
     |
     */
 
-    'widgets' => [
-        'namespace' => 'App\\Filament\\Widgets',
-        'path' => app_path('Filament/Widgets'),
-        'register' => [
-            Widgets\AccountWidget::class,
-            Widgets\FilamentInfoWidget::class,
-        ],
+  'widgets' => [
+    'namespace' => 'App\\Filament\\Widgets',
+    'path' => app_path('Filament/Widgets'),
+    'register' => [
+      Widgets\AccountWidget::class,
+      Widgets\FilamentInfoWidget::class,
     ],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Livewire
     |--------------------------------------------------------------------------
@@ -157,12 +157,12 @@ return [
     |
     */
 
-    'livewire' => [
-        'namespace' => 'App\\Filament',
-        'path' => app_path('Filament'),
-    ],
+  'livewire' => [
+    'namespace' => 'App\\Filament',
+    'path' => app_path('Filament'),
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Dark mode
     |--------------------------------------------------------------------------
@@ -172,9 +172,9 @@ return [
     |
     */
 
-    'dark_mode' => false,
+  'dark_mode' => false,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Layout
     |--------------------------------------------------------------------------
@@ -186,35 +186,35 @@ return [
     |
     */
 
-    'layout' => [
-        'forms' => [
-            'actions' => [
-                'alignment' => 'left',
-            ],
-            'have_inline_labels' => false,
-        ],
-        'footer' => [
-            'should_show_logo' => true,
-        ],
-        'max_content_width' => null,
-        'notifications' => [
-            'vertical_alignment' => 'top',
-            'alignment' => 'center',
-        ],
-        'sidebar' => [
-            'is_collapsible_on_desktop' => false,
-            'groups' => [
-                'are_collapsible' => true,
-            ],
-        ],
-        'tables' => [
-            'actions' => [
-                'type' => Action::class,
-            ],
-        ],
+  'layout' => [
+    'forms' => [
+      'actions' => [
+        'alignment' => 'left',
+      ],
+      'have_inline_labels' => false,
     ],
+    'footer' => [
+      'should_show_logo' => true,
+    ],
+    'max_content_width' => null,
+    'notifications' => [
+      'vertical_alignment' => 'top',
+      'alignment' => 'center',
+    ],
+    'sidebar' => [
+      'is_collapsible_on_desktop' => false,
+      'groups' => [
+        'are_collapsible' => true,
+      ],
+    ],
+    'tables' => [
+      'actions' => [
+        'type' => Action::class,
+      ],
+    ],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Favicon
     |--------------------------------------------------------------------------
@@ -223,9 +223,9 @@ return [
     |
     */
 
-    'favicon' => null,
+  'favicon' => null,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Default Avatar Provider
     |--------------------------------------------------------------------------
@@ -235,9 +235,9 @@ return [
     |
     */
 
-    'default_avatar_provider' => \Filament\AvatarProviders\UiAvatarsProvider::class,
+  'default_avatar_provider' => \Filament\AvatarProviders\UiAvatarsProvider::class,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
     |--------------------------------------------------------------------------
@@ -247,9 +247,9 @@ return [
     |
     */
 
-    'default_filesystem_disk' => env('FILAMENT_FILESYSTEM_DRIVER', 'public'),
+  'default_filesystem_disk' => env('FILAMENT_FILESYSTEM_DRIVER', 'public'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Google Fonts
     |--------------------------------------------------------------------------
@@ -262,9 +262,9 @@ return [
     |
     */
 
-    'google_fonts' => 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap',
+  'google_fonts' => 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Middleware
     |--------------------------------------------------------------------------
@@ -274,21 +274,21 @@ return [
     |
     */
 
-    'middleware' => [
-        'auth' => [
-            Authenticate::class,
-        ],
-        'base' => [
-            EncryptCookies::class,
-            AddQueuedCookiesToResponse::class,
-            StartSession::class,
-            AuthenticateSession::class,
-            ShareErrorsFromSession::class,
-            VerifyCsrfToken::class,
-            SubstituteBindings::class,
-            DispatchServingFilamentEvent::class,
-            MirrorConfigToSubpackages::class,
-        ],
+  'middleware' => [
+    'auth' => [
+      Authenticate::class,
     ],
+    'base' => [
+      EncryptCookies::class,
+      AddQueuedCookiesToResponse::class,
+      StartSession::class,
+      AuthenticateSession::class,
+      ShareErrorsFromSession::class,
+      VerifyCsrfToken::class,
+      SubstituteBindings::class,
+      DispatchServingFilamentEvent::class,
+      MirrorConfigToSubpackages::class,
+    ],
+  ],
 
 ];
