@@ -15,11 +15,11 @@ return new class extends Migration
   {
     Schema::create('parents', function (Blueprint $table) {
       $table->id();
-      $table->string('nom');
-      $table->string('prenom');
-      $table->string('email')->unique();
-      $table->integer('phone')->unique();
-      $table->string('address')->nullable();
+      $table->string('nom', 50);
+      $table->string('prenom', 50);
+      $table->string('email', 50)->unique();
+      $table->string('phone', 50)->unique();
+      $table->string('address', 25, 255)->nullable();
       $table->timestamps();
     });
   }
