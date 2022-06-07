@@ -10,26 +10,26 @@ use Filament\Tables;
 
 class EnfantsRelationManager extends HasManyRelationManager
 {
-    protected static string $relationship = 'Enfants';
+  protected static string $relationship = 'enfant';
 
-    protected static ?string $recordTitleAttribute = 'prenom';
+  protected static ?string $recordTitleAttribute = 'prenom';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                //
-            ]);
-    }
+  public static function form(Form $form): Form
+  {
+    return $form
+      ->schema([
+        Forms\Components\TextInput::make('title')->required(),
+        Forms\Components\MarkdownEditor::make('content'),
+        // ...
+      ]);
+  }
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ]);
-    }
+  public static function table(Table $table): Table
+  {
+    return $table
+      ->columns([
+        Tables\Columns\TextColumn::make('title'),
+        // ...
+      ]);
+  }
 }
