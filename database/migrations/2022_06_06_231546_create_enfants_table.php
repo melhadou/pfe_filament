@@ -18,8 +18,8 @@ return new class extends Migration
       $table->string('nom');
       $table->string('prenom');
       $table->integer('age');
-      $table->unsignedBigInteger('parent_id');
-      $table->foreign('parent_id')->references('id')->on('parents');
+      $table->unsignedBigInteger('parent');
+      $table->foreign('parent')->references('id')->on('parents');
       $table->timestamps();
     });
   }
