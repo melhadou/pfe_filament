@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables;
+use Illuminate\Support\Facades\DB;
 
 class EnfantsResource extends Resource
 {
@@ -28,7 +29,7 @@ class EnfantsResource extends Resource
         TextInput::make('prenom')->required(),
         TextInput::make('age')->numeric()->required(),
         Select::make('parent')
-          ->options(Parents::query()->pluck('nom', 'id'))
+          ->options(Parents::select('id', DB::raw("concat(nom, ' ', prenom) as full_name"))->pluck('full_name', 'id'))
           ->searchable()
           ->required(),
       ]);
