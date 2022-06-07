@@ -12,5 +12,6 @@ class Enfants extends Model
     'nom',
     'prenom',
     'age',
+    'parent',
   ];
 }

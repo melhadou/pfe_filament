@@ -2,23 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ParentsResource\Pages;
+use App\Filament\Resources\EnfantsResource\Pages;
+use App\Models\Enfants;
 use App\Models\Parents;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables;
 
-// filters 
-// use Filament\Tables\Filters\Filter;
-// use Illuminate\Database\Eloquent\Builder;
-
-class ParentsResource extends Resource
+class EnfantsResource extends Resource
 {
-  protected static ?string $model = Parents::class;
-  protected static ?string $navigationLabel = 'Ajouter Des Parents';
+  protected static ?string $model = Enfants::class;
+  protected static ?string $navigationLabel = 'Ajouter Des Enfants';
 
   protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -29,39 +26,39 @@ class ParentsResource extends Resource
 
         TextInput::make('nom')->required(),
         TextInput::make('prenom')->required(),
-        TextInput::make('email')->email()->required(),
-        TextInput::make('phone')
-          ->tel()
-          ->required()
-          ->prefix('+212'),
-        TextInput::make('Address')
-          ->minLength(10)
-          ->maxLength(255)
+        TextInput::make('age')->numeric()->required(),
+        Select::make('parent')
+          ->options(Parents::query()->pluck('nom', 'id'))
+          ->searchable()
+          ->required(),
       ]);
   }
 
   public static function table(Table $table): Table
   {
     return $table
+      //
       ->columns([
         Tables\Columns\TextColumn::make('nom')->searchable()->sortable(),
         Tables\Columns\TextColumn::make('prenom')->searchable()->sortable(),
-        Tables\Columns\TextColumn::make('email')->sortable(),
-        Tables\Columns\TextColumn::make('phone')->sortable(),
+        Tables\Columns\TextColumn::make('age')->sortable(),
       ])
       ->filters([]);
   }
 
   public static function getRelations(): array
   {
-    return [];
+    return [
+      //
+    ];
   }
+
   public static function getPages(): array
   {
     return [
-      'index' => Pages\ListParents::route('/'),
-      'create' => Pages\CreateParents::route('/create'),
-      'edit' => Pages\EditParents::route('/{record}/edit'),
+      'index' => Pages\ListEnfants::route('/'),
+      'create' => Pages\CreateEnfants::route('/create'),
+      'edit' => Pages\EditEnfants::route('/{record}/edit'),
     ];
   }
 }
