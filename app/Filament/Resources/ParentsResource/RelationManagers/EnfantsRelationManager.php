@@ -2,11 +2,15 @@
 
 namespace App\Filament\Resources\ParentsResource\RelationManagers;
 
+use App\Models\Parents;
+use Illuminate\Support\Facades\DB;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Forms\Components\TextInput;
+
 
 class EnfantsRelationManager extends HasManyRelationManager
 {
@@ -18,9 +22,9 @@ class EnfantsRelationManager extends HasManyRelationManager
   {
     return $form
       ->schema([
-        Forms\Components\TextInput::make('title')->required(),
-        Forms\Components\MarkdownEditor::make('content'),
-        // ...
+        TextInput::make('nom')->required(),
+        TextInput::make('prenom')->required(),
+        TextInput::make('age')->numeric()->required(),
       ]);
   }
 
@@ -28,8 +32,9 @@ class EnfantsRelationManager extends HasManyRelationManager
   {
     return $table
       ->columns([
-        Tables\Columns\TextColumn::make('title'),
-        // ...
+        Tables\Columns\TextColumn::make('nom')->searchable()->sortable(),
+        Tables\Columns\TextColumn::make('prenom')->searchable()->sortable(),
+        Tables\Columns\TextColumn::make('age')->sortable(),
       ]);
   }
 }
