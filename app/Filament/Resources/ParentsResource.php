@@ -22,7 +22,7 @@ class ParentsResource extends Resource
   protected static ?string $model = Parents::class;
   protected static ?string $navigationLabel = 'Ajouter Des Parents';
 
-  protected static ?string $navigationIcon = 'heroicon-o-collection';
+  protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
   public static function form(Form $form): Form
   {
