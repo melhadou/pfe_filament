@@ -3,15 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PaymentResource\Pages;
-use App\Filament\Resources\PaymentResource\RelationManagers;
+// use App\Filament\Resources\PaymentResource\RelationManagers;
 use App\Models\Payment;
-use Filament\Forms;
+// use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables;
+// use Filament\Tables;
 use Illuminate\Support\Facades\DB;
 
 class PaymentResource extends Resource
@@ -29,10 +29,11 @@ class PaymentResource extends Resource
         Select::make('enfant_id')
           ->label('Parent')
           ->options(
-            DB::table('filament')
-              ->join('enfants', 'parents', '=', 'parent'),
-            // TODO: get data
-          )
+            DB::table('enfants')
+              ->join('parents', 'parents.id', '=', 'enfants.parent')
+              ->select('enfants.*', 'parents.nom')
+              ->get(),
+          ),
       ]);
   }
 
