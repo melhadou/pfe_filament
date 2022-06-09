@@ -18,6 +18,7 @@ class EnfantsResource extends Resource
   protected static ?string $model = Enfants::class;
   protected static ?string $navigationLabel = 'Ajouter Des Enfants';
 
+  protected static ?string $navigationGroup = 'Clients';
   protected static ?string $navigationIcon = 'heroicon-o-users';
 
   public static function form(Form $form): Form

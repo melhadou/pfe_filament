@@ -3,14 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ParentsResource\Pages;
-// use App\Filament\Resources\ParentsResource\RelationManagers\EnfantsRelationManager;
 use App\Models\Parents;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Forms\Components\TextInput;
-// use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 
 // filters 
@@ -22,6 +20,7 @@ class ParentsResource extends Resource
   protected static ?string $model = Parents::class;
   protected static ?string $navigationLabel = 'Ajouter Des Parents';
 
+  protected static ?string $navigationGroup = 'Clients';
   protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
   public static function form(Form $form): Form
