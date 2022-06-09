@@ -2,9 +2,6 @@
 
 namespace App\Filament\Resources\ParentsResource\RelationManagers;
 
-use App\Models\Parents;
-use Illuminate\Support\Facades\DB;
-use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\Table;
