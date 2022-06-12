@@ -13,12 +13,14 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('payments', function (Blueprint $table) {
+    Schema::create('payment_childs', function (Blueprint $table) {
       $table->id();
       $table->string('prix');
-      $table->string('total');
-      $table->date('payment_date')->nullable();
-      $table->foreignId('parents_id')->index()->constrained()->cascadeOnDelete();
+      $table->boolean('status');
+      $table->unsignedBigInteger('enfant_id');
+      $table->foreign('enfant_id')->references('id')->on('enfants');
+      $table->unsignedBigInteger('payment_id');
+      $table->foreign('payment_id')->references('id')->on('payments');
       $table->timestamps();
     });
   }
@@ -30,6 +32,6 @@ return new class extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('payments');
+    Schema::dropIfExists('payment_childs');
   }
 };
