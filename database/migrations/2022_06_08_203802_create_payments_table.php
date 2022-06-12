@@ -15,7 +15,7 @@ return new class extends Migration
   {
     Schema::create('payments', function (Blueprint $table) {
       $table->id();
-      $table->string('prix');
+      $table->boolean('status');
       $table->string('total');
       $table->date('payment_date')->nullable();
       $table->foreignId('parents_id')->index()->constrained()->cascadeOnDelete();
