@@ -17,10 +17,9 @@ return new class extends Migration
       $table->id();
       $table->string('prix');
       $table->string('total');
-      $table->date('last_payment')->nullable();
-      $table->date('next_payment')->nullable();
+      $table->date('payment_date')->nullable();
       $table->boolean('pyment_status');
-      $table->foreignId('enfant_id')->index()->constrained()->cascadeOnDelete();
+      $table->foreignId('parents_id')->index()->constrained()->cascadeOnDelete();
       $table->timestamps();
     });
   }

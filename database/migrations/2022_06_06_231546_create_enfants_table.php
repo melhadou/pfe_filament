@@ -17,6 +17,7 @@ return new class extends Migration
       $table->id();
       $table->string('nom');
       $table->string('prenom');
+      $table->string('full_name')->virtualAs('concat(nom, \' \', prenom)');
       $table->integer('age');
       $table->unsignedBigInteger('parent');
       $table->foreign('parent')->references('id')->on('parents');
