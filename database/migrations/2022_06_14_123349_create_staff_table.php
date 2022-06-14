@@ -13,12 +13,14 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('payments', function (Blueprint $table) {
+    Schema::create('staff', function (Blueprint $table) {
       $table->id();
-      $table->boolean('status')->default(false);
-      $table->string('total')->nullable();
-      $table->date('payment_date')->nullable();
-      $table->foreignId('parents_id')->index()->constrained()->cascadeOnDelete();
+      $table->string('nom');
+      $table->string('prenom');
+      $table->string('full_name')->virtualAs('concat(nom, \' \', prenom)');
+      $table->string('email')->unique();
+      $table->string('phone')->unique();
+      $table->string('photo')->nullable();
       $table->timestamps();
     });
   }
@@ -30,6 +32,6 @@ return new class extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('payments');
+    Schema::dropIfExists('staff');
   }
 };
