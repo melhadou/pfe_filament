@@ -20,7 +20,6 @@ return new class extends Migration
       $table->string('full_name')->virtualAs('concat(nom, \' \', prenom)');
       $table->string('email')->unique();
       $table->string('phone')->unique();
-      $table->string('photo')->nullable();
       $table->timestamps();
     });
   }

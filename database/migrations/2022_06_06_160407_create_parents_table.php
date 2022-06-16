@@ -18,8 +18,8 @@ return new class extends Migration
       $table->string('nom', 50);
       $table->string('prenom', 50);
       $table->string('full_name')->virtualAs('concat(nom, \' \', prenom)');
-      $table->string('email', 50)->unique();
-      $table->string('phone', 50)->unique();
+      $table->string('email', 50);
+      $table->string('phone', 50);
       $table->string('address', 25, 255)->nullable();
       $table->timestamps();
     });
