@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Parents extends Model
 {
   use HasFactory;
+  public function index()
+  {
+    $users = Enfants::withCount('parent')->get();
+    return $users;
+  }
 
   public function enfant()
   {
@@ -16,6 +21,10 @@ class Parents extends Model
       related: Enfants::class,
       foreignKey: 'parent',
     );
+  }
+  public static function find($get)
+  {
+    return Enfants::query()->where('id', '=', $get);
   }
   /**
    * The attributes that are mass assignable.

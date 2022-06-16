@@ -41,6 +41,7 @@ class EnfantsResource extends Resource
     return $table
       //
       ->columns([
+
         Tables\Columns\TextColumn::make('nom')->searchable()->sortable(),
         Tables\Columns\TextColumn::make('prenom')->searchable()->sortable(),
         Tables\Columns\TextColumn::make('age')->sortable(),

@@ -30,10 +30,12 @@ class ParentsResource extends Resource
 
         TextInput::make('nom')->required(),
         TextInput::make('prenom')->required(),
-        TextInput::make('email')->email()->required(),
+        TextInput::make('email')->email()->required()->unique(),
         TextInput::make('phone')
+          ->unique()
           ->tel()
           ->required()
+          ->mask(fn (TextInput\Mask $mask) => $mask->pattern('00-00-00-00-00'))
           ->prefix('+212'),
         TextInput::make('Address')
           ->minLength(10)
