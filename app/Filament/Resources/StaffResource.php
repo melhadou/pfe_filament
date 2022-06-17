@@ -8,6 +8,9 @@ use App\Models\Enfants;
 use App\Models\Parents;
 use App\Models\Staff;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -27,33 +30,76 @@ class StaffResource extends Resource
   protected static ?string $navigationIcon = 'heroicon-o-user-group';
   public $parentId;
   public $enfantId;
+
+
   public static function form(Form $form): Form
   {
     return $form
       ->schema([
-        TextInput::make('nom')->required(),
-        TextInput::make('prenom')->required(),
-        TextInput::make('email')->type('email')->required(),
-        TextInput::make('phone')
-          ->tel()
-          ->required()
-          ->prefix('+212'),
+        Card::make()
+          ->schema([
 
-        Select::make('parentId')
-          ->label('parent')
-          ->options(Parents::all()->pluck('full_name', 'id')->toArray())
-          ->afterStateUpdated(fn (callable $set) => $set('enfantId', 'id')),
-        Select::make('enfantId')
-          ->label('enfant')
-          ->options(
-            function (callable $get) {
-              $parentId = Parents::find($get('parentId'));
+            TextInput::make('nom')->required(),
+            TextInput::make('prenom')->required(),
+            Grid::make()
+              ->schema([
 
-              return $parentId->pluck('full_name', 'id');
-            }
-          ),
+                TextInput::make('email')->email()->required(),
+                TextInput::make('phone')
+
+                  ->tel()
+                  ->required()
+                  ->mask(fn (TextInput\Mask $mask) => $mask->pattern('0 00 00 00 00'))
+                  ->prefix('+212'),
+              ]),
+
+          ])
+          ->columnSpan([
+            'sm' => 2,
+          ]),
+        Card::make()
+          ->schema([
+            Placeholder::make('created_at')
+              ->label('Created at')
+              ->content(fn (?Staff $record): string => $record ? $record->created_at->diffForHumans() : '-'),
+            Placeholder::make('updated_at')
+              ->label('Last modified at')
+              ->content(fn (?Staff $record): string => $record ? $record->updated_at->diffForHumans() : '-'),
+          ])
+          ->columnSpan(1),
+      ])
+      ->columns([
+        'sm' => 3,
+        'lg' => null,
       ]);
   }
+  // public static function form(Form $form): Form
+  // {
+  //   return $form
+  //     ->schema([
+  //       TextInput::make('nom')->required(),
+  //       TextInput::make('prenom')->required(),
+  //       TextInput::make('email')->type('email')->required(),
+  //       TextInput::make('phone')
+  //         ->tel()
+  //         ->required()
+  //         ->prefix('+212'),
+
+  //       Select::make('parentId')
+  //         ->label('parent')
+  //         ->options(Parents::all()->pluck('full_name', 'id')->toArray())
+  //         ->afterStateUpdated(fn (callable $set) => $set('enfantId', 'id')),
+  //       Select::make('enfantId')
+  //         ->label('enfant')
+  //         ->options(
+  //           function (callable $get) {
+  //             $parentId = Parents::find($get('parentId'));
+
+  //             return $parentId->pluck('full_name', 'id');
+  //           }
+  //         ),
+  //     ]);
+  // }
 
   public static function table(Table $table): Table
   {
