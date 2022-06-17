@@ -126,4 +126,8 @@ class PaymentResource extends Resource
       'edit' => Pages\EditPayment::route('/{record}/edit'),
     ];
   }
+  protected static function getNavigationBadge(): ?string
+  {
+    return static::$model::query()->count();
+  }
 }

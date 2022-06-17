@@ -130,4 +130,8 @@ class StaffResource extends Resource
       'edit' => Pages\EditStaff::route('/{record}/edit'),
     ];
   }
+  protected static function getNavigationBadge(): ?string
+  {
+    return static::$model::query()->count();
+  }
 }
