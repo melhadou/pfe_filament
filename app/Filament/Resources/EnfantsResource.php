@@ -5,6 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EnfantsResource\Pages;
 use App\Models\Enfants;
 use App\Models\Parents;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -25,14 +28,38 @@ class EnfantsResource extends Resource
   {
     return $form
       ->schema([
+        Card::make()
+          ->schema([
 
-        TextInput::make('nom')->required(),
-        TextInput::make('prenom')->required(),
-        TextInput::make('age')->numeric()->required(),
-        Select::make('parent')
-          ->options(Parents::select('id', DB::raw("concat(nom, ' ', prenom) as full_name"))->pluck('full_name', 'id'))
-          ->searchable()
-          ->required(),
+            TextInput::make('nom')->required(),
+            TextInput::make('prenom')->required(),
+            Grid::make()
+              ->schema([
+
+                TextInput::make('age')->numeric()->minValue(0)->required(),
+                Select::make('parent')
+                  ->options(Parents::select('id', DB::raw("concat(nom, ' ', prenom) as full_name"))->pluck('full_name', 'id'))
+                  ->searchable()
+                  ->required(),
+              ]),
+          ])
+          ->columnSpan([
+            'sm' => 2,
+          ]),
+        Card::make()
+          ->schema([
+            Placeholder::make('created_at')
+              ->label('Created at')
+              ->content(fn (?Enfants $record): string => $record ? $record->created_at->diffForHumans() : '-'),
+            Placeholder::make('updated_at')
+              ->label('Last modified at')
+              ->content(fn (?Enfants $record): string => $record ? $record->updated_at->diffForHumans() : '-'),
+          ])
+          ->columnSpan(1),
+      ])
+      ->columns([
+        'sm' => 3,
+        'lg' => null,
       ]);
   }
 
