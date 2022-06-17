@@ -43,7 +43,7 @@ class ParentsResource extends Resource
 
                   ->tel()
                   ->required()
-                  ->mask(fn (TextInput\Mask $mask) => $mask->pattern('00-00-00-00-00'))
+                  ->mask(fn (TextInput\Mask $mask) => $mask->pattern('0 00 00 00 00'))
                   ->prefix('+212'),
               ]),
 
