@@ -38,7 +38,7 @@ class ParentsResource extends Resource
             Grid::make()
               ->schema([
 
-                TextInput::make('email')->email()->required()->unique(),
+                TextInput::make('email')->email()->required(),
                 TextInput::make('phone')
 
                   ->tel()
