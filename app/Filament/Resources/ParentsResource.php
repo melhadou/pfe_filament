@@ -11,6 +11,9 @@ use Filament\Resources\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables;
 
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
 // filters 
 // use Filament\Tables\Filters\Filter;
 // use Illuminate\Database\Eloquent\Builder;
@@ -27,19 +30,45 @@ class ParentsResource extends Resource
   {
     return $form
       ->schema([
+        Card::make()
+          ->schema([
 
-        TextInput::make('nom')->required(),
-        TextInput::make('prenom')->required(),
-        TextInput::make('email')->email()->required()->unique(),
-        TextInput::make('phone')
-          ->unique()
-          ->tel()
-          ->required()
-          ->mask(fn (TextInput\Mask $mask) => $mask->pattern('00-00-00-00-00'))
-          ->prefix('+212'),
-        TextInput::make('Address')
-          ->minLength(10)
-          ->maxLength(255)
+            TextInput::make('nom')->required(),
+            TextInput::make('prenom')->required(),
+            Grid::make()
+              ->schema([
+
+                TextInput::make('email')->email()->required()->unique(),
+                TextInput::make('phone')
+
+                  ->tel()
+                  ->required()
+                  ->mask(fn (TextInput\Mask $mask) => $mask->pattern('00-00-00-00-00'))
+                  ->prefix('+212'),
+              ]),
+
+            TextInput::make('Address')
+              ->minLength(10)
+              ->maxLength(255)
+
+          ])
+          ->columnSpan([
+            'sm' => 2,
+          ]),
+        Card::make()
+          ->schema([
+            Placeholder::make('created_at')
+              ->label('Created at')
+              ->content(fn (?Parents $record): string => $record ? $record->created_at->diffForHumans() : '-'),
+            Placeholder::make('updated_at')
+              ->label('Last modified at')
+              ->content(fn (?Parents $record): string => $record ? $record->updated_at->diffForHumans() : '-'),
+          ])
+          ->columnSpan(1),
+      ])
+      ->columns([
+        'sm' => 3,
+        'lg' => null,
       ]);
   }
 

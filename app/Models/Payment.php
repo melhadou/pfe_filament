@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Payment extends Model
 {
@@ -14,7 +15,22 @@ class Payment extends Model
   {
     return $this->belongsTo(
       related: Parents::class,
-      foreignKey: 'parent_id',
+      foreignKey: 'parents_id',
+    );
+  }
+
+  public function payment()
+  {
+    return $this->belongsTo(
+      related: Payment::class,
+      foreignKey: 'parents_id',
+    );
+  }
+  public function parent(): BelongsTo
+  {
+    return $this->belongsTo(
+      related: Parents::class,
+      foreignKey: 'id',
     );
   }
   protected $fillable = [
@@ -22,6 +38,7 @@ class Payment extends Model
     'status',
     'total',
     'payment_date',
+    'parent_name',
     'parents_id',
   ];
 }

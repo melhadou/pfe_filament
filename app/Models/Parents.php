@@ -15,6 +15,13 @@ class Parents extends Model
     return $users;
   }
 
+  public function payment()
+  {
+    return $this->hasMany(
+      related: Parents::class,
+      foreignKey: 'parents_id',
+    );
+  }
   public function enfant()
   {
     return $this->hasMany(

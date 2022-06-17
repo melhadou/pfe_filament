@@ -8,6 +8,7 @@ use App\Models\Parents;
 use App\Models\Payment;
 use Closure;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Placeholder;
@@ -17,6 +18,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 
 // use Filament\Tables;
@@ -48,16 +50,30 @@ class PaymentResource extends Resource
               ->reactive()
               ->afterStateUpdated(fn (callable $set) => $set('parents_id', null)),
 
+            // Select::make('parent_name')
+            //   ->options(
+            //     fn ($get, $set) => $set('parent_name', parents::query()->where('id', '=', $get('parents_id'))->pluck('full_name', 'full_name')->toarray())
+            //   ),
             Select::make('parents_id')
               ->label('Parent')
               ->options(Parents::all()->pluck('full_name', 'id')->toArray())
               ->searchable()
               ->required()
+              ->afterStateUpdated(
+                function (callable $get, $set) {
+                  $prnt = Parents::query()->where('id', '=', $get('parents_id'))->pluck('full_name')[0];
+                  $name = (string)$prnt;
+                  return $set('parent_name', $name);
+                }
+              )
               ->reactive(),
+
+            DatePicker::make('payment_date')->required(),
             Grid::make()
               ->schema([
+
+                TextInput::make('parent_name')->reactive()->default('John Doe')->disabled(),
                 TextInput::make('total')->reactive()->prefixIcon('heroicon-o-cash')->disabled(),
-                TextInput::make('payment_date')->label('Payment Date')->type('date')->required(),
               ]),
             Toggle::make('status')->label('Payment Status'),
           ])
@@ -86,7 +102,11 @@ class PaymentResource extends Resource
   {
     return $table
       ->columns([
-        TextColumn::make('parents_id')->label('Parents')
+        TextColumn::make('parent_name')->sortable()->searchable(),
+        BooleanColumn::make('status')
+          ->label('Payement Status')
+          ->sortable(),
+        TextColumn::make('payment_date')->sortable()->searchable(),
       ])
       ->filters([
         //

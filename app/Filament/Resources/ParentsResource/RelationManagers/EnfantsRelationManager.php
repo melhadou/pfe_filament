@@ -21,7 +21,7 @@ class EnfantsRelationManager extends HasManyRelationManager
       ->schema([
         TextInput::make('nom')->required(),
         TextInput::make('prenom')->required(),
-        TextInput::make('age')->numeric()->required(),
+        TextInput::make('age')->numeric()->required()->minValue(0),
       ]);
   }
 
