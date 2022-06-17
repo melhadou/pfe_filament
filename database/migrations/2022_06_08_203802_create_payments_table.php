@@ -19,6 +19,7 @@ return new class extends Migration
       $table->integer('total')->nullable()->default(0);
       $table->boolean('status')->default(false);
       $table->date('payment_date')->nullable();
+      $table->string('parent_name');
       $table->foreignId('parents_id')->index()->constrained()->cascadeOnDelete();
       $table->timestamps();
     });

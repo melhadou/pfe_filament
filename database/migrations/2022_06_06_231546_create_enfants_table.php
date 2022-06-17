@@ -20,7 +20,7 @@ return new class extends Migration
       $table->string('full_name')->virtualAs('concat(nom, \' \', prenom)');
       $table->integer('age');
       $table->unsignedBigInteger('parent');
-      $table->foreign('parent')->references('id')->on('parents');
+      $table->foreign('parent')->references('id')->on('parents')->onDelete('cascade');
       $table->timestamps();
     });
   }
